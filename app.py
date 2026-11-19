@@ -42,6 +42,9 @@ def create_database():
     conn.close()
 
 
+create_database()
+
+
 # Connect to Ollama AI
 def ask_ollama(prompt):
 
