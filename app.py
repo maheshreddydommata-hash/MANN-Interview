@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, flash, session
+import os
 import sqlite3
 import requests
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -16,8 +17,7 @@ def start():
     response = redirect('/register')
     response.set_cookie('visited', 'yes', max_age=60*60*24*365)
     return response
-app.secret_key = "ai_interview_secret_key"
-
+app.secret_key = os.environ.get("FLASK_SECRET_KEY") or "local-development-only-change-me"
 
 # Database connection
 def get_db():
