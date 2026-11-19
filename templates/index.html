@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MANN Interview | AI Mock Interview</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #080f25;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+
+        body::before {
+            content: "";
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: #174bd4;
+            filter: blur(150px);
+            opacity: 0.35;
+            top: -150px;
+            left: -100px;
+            animation: moveGlow 8s infinite alternate;
+            z-index: -1;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            width: 450px;
+            height: 450px;
+            background: #9b31d9;
+            filter: blur(150px);
+            opacity: 0.3;
+            bottom: -150px;
+            right: -100px;
+            animation: moveGlow 10s infinite alternate-reverse;
+            z-index: -1;
+        }
+
+        @keyframes moveGlow {
+            from {
+                transform: translate(0, 0);
+            }
+            to {
+                transform: translate(100px, 80px);
+            }
+        }
+
+        /* Floating particles */
+
+        .particles span {
+            position: fixed;
+            width: 5px;
+            height: 5px;
+            background: #64d9ff;
+            border-radius: 50%;
+            box-shadow: 0 0 15px #64d9ff;
+            animation: float 9s infinite linear;
+            z-index: -1;
+        }
+
+        .particles span:nth-child(1) {
+            left: 10%;
+            top: 80%;
+            animation-delay: 0s;
+        }
+
+        .particles span:nth-child(2) {
+            left: 25%;
+            top: 90%;
+            animation-delay: 2s;
+        }
+
+        .particles span:nth-child(3) {
+            left: 45%;
+            top: 75%;
+            animation-delay: 4s;
+        }
+
+        .particles span:nth-child(4) {
+            left: 70%;
+            top: 85%;
+            animation-delay: 1s;
+        }
+
+        .particles span:nth-child(5) {
+            left: 90%;
+            top: 90%;
+            animation-delay: 3s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+            30% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-900px);
+                opacity: 0;
+            }
+        }
+
+        /* Navigation */
+
+        nav {
+            padding: 22px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(8, 15, 37, 0.8);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(15px);
+        }
+
+        nav h2 {
+            font-size: 27px;
+            letter-spacing: 2px;
+            color: #65d9ff;
+            animation: titleGlow 3s infinite alternate;
+        }
+
+        nav span {
+            color: #c5d6f5;
+            letter-spacing: 1px;
+            font-size: 14px;
+        }
+
+        @keyframes titleGlow {
+            from {
+                text-shadow: 0 0 5px #168cff;
+            }
+            to {
+                text-shadow: 0 0 20px #168cff,
+                             0 0 35px #873cff;
+            }
+        }
+
+        /* Hero section */
+
+        .hero {
+            min-height: 570px;
+            padding: 100px 20px 65px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tag {
+            padding: 10px 22px;
+            border: 1px solid #387dff;
+            border-radius: 30px;
+            color: #75d9ff;
+            background: rgba(30, 100, 255, 0.12);
+            font-size: 13px;
+            letter-spacing: 2px;
+            animation: fadeIn 1s ease;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 7vw, 76px);
+            margin-top: 30px;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+            background: linear-gradient(
+                90deg,
+                #ffffff,
+                #55caff,
+                #b18cff,
+                #ffffff
+            );
+            background-size: 300%;
+            color: transparent;
+            background-clip: text;
+            -webkit-background-clip: text;
+            animation: shine 5s linear infinite,
+                       fadeUp 1s ease;
+        }
+
+        @keyframes shine {
+            0% { background-position: 0%; }
+            100% { background-position: 300%; }
+        }
+
+        .hero p {
+            color: #b8c9e8;
+            font-size: 18px;
+            line-height: 1.8;
+            max-width: 650px;
+            animation: fadeUp 1.5s ease;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(35px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* AI animated circle */
+
+        .ai-circle {
+            width: 105px;
+            height: 105px;
+            margin: 35px 0 5px;
+            border: 2px solid #53caff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 36px;
+            font-weight: bold;
+            color: #78dcff;
+            box-shadow: 0 0 20px #168cff,
+                        inset 0 0 20px #168cff;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 20px #168cff;
+            }
+            50% {
+                transform: scale(1.08);
+                box-shadow: 0 0 45px #168cff;
+            }
+        }
+
+        /* Button */
+
+        .btn {
+            display: inline-block;
+            margin-top: 35px;
+            padding: 17px 45px;
+            background: linear-gradient(90deg, #0878ff, #803cff);
+            color: white;
+            text-decoration: none;
+            border-radius: 35px;
+            font-size: 17px;
+            font-weight: bold;
+            box-shadow: 0 0 20px rgba(40, 120, 255, 0.5);
+            transition: 0.3s;
+            animation: fadeUp 2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 0 35px #398bff;
+        }
+
+        /* Feature cards */
+
+        .features {
+            padding: 45px 8% 90px;
+            text-align: center;
+        }
+
+        .features h2 {
+            font-size: 30px;
+            margin-bottom: 35px;
+            color: #d8e9ff;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            padding: 35px 20px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(100,180,255,0.2);
+            border-radius: 18px;
+            backdrop-filter: blur(12px);
+            transition: 0.4s;
+        }
+
+        .card:hover {
+            transform: translateY(-12px);
+            border-color: #55caff;
+            box-shadow: 0 0 25px rgba(60,150,255,0.25);
+        }
+
+        .card .icon {
+            font-size: 42px;
+            margin-bottom: 18px;
+        }
+
+        .card h3 {
+            color: #65d9ff;
+            margin-bottom: 12px;
+            font-size: 21px;
+        }
+
+        .card p {
+            color: #b8c9e8;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        /* Footer */
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #91a5c8;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+        }
+
+        /* Mobile responsive */
+
+        @media(max-width: 700px) {
+            nav {
+                padding: 18px 5%;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav h2 {
+                font-size: 23px;
+            }
+
+            nav span {
+                font-size: 12px;
+            }
+
+            .hero {
+                padding: 80px 18px 55px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .features h2 {
+                font-size: 25px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="particles">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <nav>
+        <h2>MANN INTERVIEW</h2>
+        <span>Prepare | Practice | Succeed</span>
+    </nav>
+
+    <section class="hero">
+
+        <div class="tag">
+            ✨ AI POWERED INTERVIEW PREPARATION
+        </div>
+
+        <div class="ai-circle">AI</div>
+
+        <h1>MANN INTERVIEW</h1>
+
+        <p>
+            Your journey towards interview success starts here.
+            Improve your knowledge, practice real interview questions
+            and receive AI-powered feedback to build your confidence.
+        </p>
+
+        <a href="/start" class="btn">Get Started →</a>
+
+    </section>
+
+    <section class="features">
+
+        <h2>Explore Your Interview Practice</h2>
+
+        <div class="cards">
+
+            <div class="card">
+                <div class="icon">💻</div>
+                <h3>Technical Interview</h3>
+                <p>
+                    Improve your technical knowledge with
+                    skill-based interview questions and AI evaluation.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">👔</div>
+                <h3>HR Interview</h3>
+                <p>
+                    Practice professional HR questions and
+                    improve your communication and confidence.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">⌨️</div>
+                <h3>Coding Interview</h3>
+                <p>
+                    Practice programming questions, improve
+                    problem-solving and understand better solutions.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <footer>
+        MANN Interview © 2026 | AI-Powered Mock Interview System
+    </footer>
+
+</body>
+</html>

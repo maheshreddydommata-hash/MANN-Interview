@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MANN Interview - Results</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(120deg, #071b42, #171747, #35105c);
+            margin: 0;
+            padding: 40px 20px;
+            color: #eaf2ff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Left and right glowing animations */
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            filter: blur(75px);
+            opacity: 0.65;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::before {
+            background: #0878ff;
+            left: -100px;
+            top: 15%;
+            animation: leftGlow 7s ease-in-out infinite alternate;
+        }
+
+        body::after {
+            background: #a020f0;
+            right: -100px;
+            bottom: 10%;
+            animation: rightGlow 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes leftGlow {
+            from {
+                transform: translate(0, 0) scale(1);
+            }
+            to {
+                transform: translate(70px, 120px) scale(1.3);
+            }
+        }
+
+        @keyframes rightGlow {
+            from {
+                transform: translate(0, 0) scale(1);
+            }
+            to {
+                transform: translate(-70px, -120px) scale(1.3);
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.10);
+            padding: 35px;
+            border-radius: 22px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 0 35px rgba(40, 120, 255, 0.18);
+            backdrop-filter: blur(15px);
+            animation: containerAppear 1s ease;
+        }
+
+        @keyframes containerAppear {
+            from {
+                opacity: 0;
+                transform: translateY(35px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            text-align: center;
+            color: #70d5ff;
+            font-size: 30px;
+            margin-bottom: 35px;
+            animation: titleGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            from {
+                text-shadow: 0 0 5px #0878ff;
+            }
+            to {
+                text-shadow: 0 0 20px #70d5ff, 0 0 30px #8b5cf6;
+            }
+        }
+
+        h2 {
+            color: #70d5ff;
+            margin-top: 0;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 25px;
+            margin-top: 25px;
+            border-radius: 14px;
+            border: 1px solid rgba(112, 213, 255, 0.20);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+            animation: sectionAppear 1s ease both;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:nth-of-type(2) {
+            animation-delay: 0.2s;
+        }
+
+        .section:nth-of-type(3) {
+            animation-delay: 0.4s;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 22px rgba(80, 160, 255, 0.22);
+        }
+
+        @keyframes sectionAppear {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feedback {
+            white-space: pre-wrap;
+            line-height: 1.9;
+            font-size: 15px;
+            color: #e4eaff;
+        }
+
+        .answer {
+            white-space: pre-wrap;
+            line-height: 1.9;
+            color: #e4eaff;
+            font-size: 15px;
+        }
+
+        button {
+            background: linear-gradient(90deg, #0878ff, #8b35e8);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 9px;
+            cursor: pointer;
+            margin-top: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(50, 120, 255, 0.3);
+        }
+
+        button:hover {
+            transform: translateY(-4px) scale(1.04);
+            box-shadow: 0 0 25px rgba(130, 80, 255, 0.7);
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 20px 12px;
+            }
+
+            .container {
+                padding: 22px 16px;
+            }
+
+            h1 {
+                font-size: 23px;
+            }
+
+            .section {
+                padding: 18px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🤖 MANN Interview Evaluation Report</h1>
+
+    <div class="section">
+        <h2>📝 Your Questions and Answers</h2>
+        <div class="answer">{{ answer }}</div>
+    </div>
+
+    <div class="section">
+        <h2>🧠 AI Evaluation and Correct Answers</h2>
+        <div class="feedback">{{ feedback }}</div>
+    </div>
+
+    <center>
+        <button onclick="window.location.href='/dashboard'">
+            Back to Dashboard →
+        </button>
+    </center>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MANN Interview - Mock Interview Setup</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            color: white;
+            background: linear-gradient(135deg, #050b25, #101c4b, #35105c);
+            overflow-x: hidden;
+        }
+
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.45;
+            z-index: -1;
+            animation: glow 7s infinite alternate;
+        }
+
+        body::before {
+            background: #0878ff;
+            top: -100px;
+            left: -100px;
+        }
+
+        body::after {
+            background: #a020f0;
+            bottom: -100px;
+            right: -100px;
+            animation-delay: 2s;
+        }
+
+        @keyframes glow {
+            from { transform: translate(0, 0); }
+            to { transform: translate(80px, 60px); }
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            animation: slideDown 0.8s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header h1 {
+            font-size: 36px;
+            letter-spacing: 2px;
+            background: linear-gradient(90deg, #fff, #53c8ff, #c084fc);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: titleGlow 3s infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            from { filter: drop-shadow(0 0 5px #168bff); }
+            to { filter: drop-shadow(0 0 18px #a020f0); }
+        }
+
+        header p {
+            color: #c2d4f2;
+            margin-top: 12px;
+            font-size: 16px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.09);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 550px;
+            width: calc(100% - 30px);
+            margin: 40px auto;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.35);
+            animation: cardAppear 1s ease;
+            transition: transform 0.3s ease;
+        }
+
+        @keyframes cardAppear {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .container:hover {
+            box-shadow: 0 20px 50px rgba(8, 120, 255, 0.2);
+        }
+
+        .container h2 {
+            font-size: 26px;
+            color: #65c8ff;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #e3ecff;
+        }
+
+        select {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 9px;
+            background: rgba(255, 255, 255, 0.12);
+            color: white;
+            outline: none;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        select:focus {
+            border-color: #53c8ff;
+            box-shadow: 0 0 12px rgba(83, 200, 255, 0.5);
+        }
+
+        select option {
+            background: #101c4b;
+            color: white;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 30px;
+            background: linear-gradient(90deg, #0878ff, #8a36e8);
+            color: white;
+            border: none;
+            border-radius: 9px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 25px rgba(75, 150, 255, 0.7);
+        }
+
+        button:active {
+            transform: scale(0.97);
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            color: #aebfdf;
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 27px;
+            }
+
+            .container {
+                padding: 25px 20px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>MANN INTERVIEW</h1>
+    <p>Prepare for your dream IT job</p>
+    <p>PREPARE | PRACTICE | SUCCEED</p>
+</header>
+
+<div class="container">
+
+    <h2>🤖 Interview Setup</h2>
+
+    <form action="/start-interview" method="POST">
+
+        <label>Candidate Level</label>
+
+        <select name="level" required>
+            <option value="">Select your level</option>
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Advanced">Advanced</option>
+            <option value="Company Level">Company Level</option>
+        </select>
+
+        <label>Interview Category</label>
+
+        <select name="category" required>
+            <option value="">Select interview category</option>
+            <option value="Technical">Technical Interview</option>
+            <option value="HR">HR Interview</option>
+            <option value="Coding">Coding Practice</option>
+            <option value="Full Mock Interview">Full Mock Interview</option>
+        </select>
+
+        <label>Select Skill:</label>
+
+        <select name="skill" required>
+            <option value="">Choose a Skill</option>
+            <option value="AI and Machine Learning">AI & Machine Learning</option>
+            <option value="Data Science & Data Analytics">Data Science & Data Analytics</option>
+            <option value="Full Stack Development">Full Stack Development</option>
+            <option value="Cybersecurity">Cybersecurity</option>
+            <option value="Cloud Computing">Cloud Computing</option>
+            <option value="Java & Software Engineering">Java & Software Engineering</option>
+            <option value="Mobile App Development">Mobile App Development</option>
+            <option value="DevOps & Automation">DevOps & Automation</option>
+            <option value="UI/UX Design">UI/UX Design</option>
+            <option value="Robotics & Automation">Robotics & Automation</option>
+        </select>
+
+        <button type="submit">Begin Interview →</button>
+
+    </form>
+
+</div>
+
+<footer>
+    MANN Interview © 2026 | AI-Powered Interview Preparation
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Technical Interview</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f0f6ff;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .box {
+            background: white;
+            max-width: 650px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px #ccc;
+        }
+
+        select, textarea {
+            width: 90%;
+            padding: 12px;
+            margin: 15px;
+        }
+
+        textarea {
+            height: 120px;
+        }
+
+        button {
+            background: #0878d1;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+
+    <h1>Technical Interview Practice</h1>
+
+    <form method="POST">
+
+        <h3>Select Your Subject</h3>
+
+        <select name="subject" onchange="this.form.submit()" required>
+    <option value="Python" {% if selected_subject == 'Python' %}selected{% endif %}>Python</option>
+    <option value="Java" {% if selected_subject == 'Java' %}selected{% endif %}>Java</option>
+    <option value="SQL" {% if selected_subject == 'SQL' %}selected{% endif %}>SQL</option>
+</select>
+
+        <h3>Interview Question</h3>
+
+        <p>{{ question }}</p>
+
+        <textarea name="answer"
+                  placeholder="Type your answer here..."
+                  required></textarea>
+
+        <br>
+
+        <button type="submit">Submit Answer</button>
+
+    </form>
+
+    {% if feedback %}
+        <h3>Feedback</h3>
+        <p>{{ feedback }}</p>
+    {% endif %}
+
+    <br>
+    <a href="/dashboard">Back to Dashboard</a>
+
+</div>
+
+</body>
+</html>

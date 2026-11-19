@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MANN Interview - Registration</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 15px;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #050b25, #101c4b, #35105c);
+            color: white;
+        }
+
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.5;
+            z-index: -1;
+            animation: glow 7s infinite alternate;
+        }
+
+        body::before {
+            background: #0878ff;
+            top: -100px;
+            left: -100px;
+        }
+
+        body::after {
+            background: #a020f0;
+            bottom: -100px;
+            right: -100px;
+            animation-delay: 2s;
+        }
+
+        @keyframes glow {
+            from {
+                transform: translate(0, 0);
+            }
+            to {
+                transform: translate(80px, 60px);
+            }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 430px;
+            text-align: center;
+            animation: appear 1s ease;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .brand {
+            font-size: 38px;
+            font-weight: bold;
+            letter-spacing: 4px;
+            margin-bottom: 8px;
+            background: linear-gradient(90deg, #ffffff, #53c8ff, #c084fc);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: titleGlow 3s infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            from {
+                filter: drop-shadow(0 0 5px #168bff);
+            }
+            to {
+                filter: drop-shadow(0 0 18px #a020f0);
+            }
+        }
+
+        .tagline {
+            color: #b9c9e8;
+            margin-bottom: 25px;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .form-box {
+            background: rgba(255, 255, 255, 0.09);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 35px 28px;
+            border-radius: 20px;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .form-box:hover {
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            color: #c2cde3;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            margin: 10px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 9px;
+            outline: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        input::placeholder {
+            color: #c5cee0;
+        }
+
+        input:focus {
+            border-color: #43b8ff;
+            box-shadow: 0 0 12px rgba(67, 184, 255, 0.5);
+            transform: scale(1.02);
+        }
+
+        button {
+            width: 100%;
+            margin-top: 18px;
+            padding: 14px;
+            border: none;
+            border-radius: 9px;
+            background: linear-gradient(90deg, #0878ff, #8a36e8);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 22px rgba(75, 150, 255, 0.7);
+        }
+
+        button:active {
+            transform: scale(0.97);
+        }
+
+        .message {
+            color: #80d5ff;
+            margin: 12px 0;
+            font-size: 14px;
+        }
+
+        .login-link {
+            margin-top: 22px;
+            color: #c2cde3;
+            font-size: 14px;
+        }
+
+        .login-link a {
+            color: #65c8ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            .brand {
+                font-size: 30px;
+            }
+
+            .form-box {
+                padding: 28px 20px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="brand">MANN INTERVIEW</div>
+
+    <p class="tagline">PREPARE | PRACTICE | SUCCEED</p>
+
+    <div class="form-box">
+
+        <h2>Create Your Account</h2>
+
+        <p class="description">
+            Start your AI-powered interview preparation journey.
+        </p>
+
+        {% with messages = get_flashed_messages() %}
+            {% for message in messages %}
+                <p class="message">{{ message }}</p>
+            {% endfor %}
+        {% endwith %}
+
+        <form method="POST" action="/register">
+
+            <input type="text"
+                   name="name"
+                   placeholder="Full Name"
+                   required>
+
+            <input type="email"
+                   name="email"
+                   placeholder="Email Address"
+                   required>
+
+            <input type="password"
+                   name="password"
+                   placeholder="Password (minimum 8 characters)"
+                   minlength="8"
+                   required>
+
+            <input type="password"
+                   name="confirm_password"
+                   placeholder="Confirm Password"
+                   required>
+
+            <button type="submit">Create Account</button>
+
+        </form>
+
+        <div class="login-link">
+            Already have an account?
+            <a href="/login">Login</a>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
